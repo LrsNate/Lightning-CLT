@@ -2,15 +2,22 @@
 # define __LIGHTNING__
 # include <iostream>
 # include <string>
+# include <vector>
+# include <map>
 
 using namespace std;
 
 class Command
 {
 public:
-	string Line;
-	Command(string line);
+	enum Type {GENERATE_COMMAND, HELP, ERROR};
+	Command(char **line);
 	~Command();
+	void Parse();
+private:
+	char	**line_array;
+	map<Type, vector<string> > commands;
+	Type checkType(string arg);
 };
 
 class Utils
@@ -18,7 +25,6 @@ class Utils
 public:
 	Utils();
 	~Utils();
-	string ArrayToString(char** array);
-}
+};
 
 #endif /* __LIGHTNING__ */
