@@ -1,4 +1,4 @@
-Lightning-CTL
+Lightning-CLT
 =============
 
 Lightning Command Line Tools
