@@ -15,9 +15,9 @@ public:
 	~Command();
 	void Parse();
 private:
-	char	**line_array;
-	map<Type, vector<string> > commands;
-	Type checkType(string arg);
+	char						**line_array;
+	map<Type, vector<string> >	commands;
+	Type 						checkType(string arg);	
 };
 
 class Utils
