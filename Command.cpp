@@ -19,16 +19,18 @@ void Command::Parse()
 {
 	Command::Type command_type = Command::checkType(Command::line_array[1]);
 	if (command_type == ERROR)
-		cout << "No command found" << endl;
-	else if (command_type == HELP)
-		cout << "== Lightning Help ==" << endl;
-	else if (command_type == GENERATE_COMMAND)
-		cout << "Generating Bundle" << endl;
-	// for (int i = 1; Command::line_array[i] != NULL; i++)
-	// {
-	// 	string current(Command::line_array[i]);
-
-	// }
+		cout << "No command '"<< Command::line_array[1] <<"' found" << endl;
+	else
+	{
+		int size = 0;
+		for (int i = 2; Command::line_array[i] != NULL; i++)
+			size++;
+		if (size >= 1)
+		{
+			cout << size << endl;
+			vector<string> args = Utils<char **>::ResizeArray(Command::line_array, 1, size);
+		}
+	}
 }
 
 Command::Type Command::checkType(string arg)
@@ -39,8 +41,12 @@ Command::Type Command::checkType(string arg)
 		for (vector<string>::iterator it = current.begin(); it != current.end(); ++it)
 		{
 			if (*it == arg)
+			{
+				vector<string>().swap(current);		
 				return (static_cast<Command::Type>(i));
+			}
 		}
+		vector<string>().swap(current);
 	}
 	return (ERROR);
 }
