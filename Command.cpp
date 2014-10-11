@@ -27,8 +27,7 @@ void Command::Parse()
 			size++;
 		if (size >= 1)
 		{
-			cout << size << endl;
-			vector<string> args = Utils<char **>::ResizeArray(Command::line_array, 1, size);
+			vector<string> test = Utils::CreateStringVector(Command::line_array, 2, size);
 		}
 	}
 }

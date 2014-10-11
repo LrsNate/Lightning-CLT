@@ -23,19 +23,12 @@ private:
 	Type 						checkType(string arg);	
 };
 
-template <class T>
 class Utils
 {
 public:
 	Utils();
 	~Utils();
-	static vector<string> ResizeArray(T array, int start, int size)
-	{
-		vector<string> newArray(size);
-		for (int i = start + size; i != start; i--)
-			newArray.push_back(array[i]);
-		return (newArray);
-	}
+	static vector<string>	CreateStringVector(char **array, int start, int size);
 };
 
 #endif /* __LIGHTNING__ */
