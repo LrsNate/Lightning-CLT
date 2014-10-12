@@ -3,13 +3,14 @@
 Command::Command(char **line)
 {
 	Command::line_array = line;
-	vector<string> generate_vector(3);
+	vector<string> generate_vector;
 	generate_vector.push_back("gen");
 	generate_vector.push_back("generate");
 	generate_vector.push_back("g");
 	commands[GENERATE_COMMAND] = generate_vector;
+	commands_callback[GENERATE_COMMAND] = BundleGeneration::GenerateBundle;
 
-	vector<string> help_vector(3);
+	vector<string> help_vector;
 	help_vector.push_back("help");
 	help_vector.push_back("h");
 	commands[HELP] = help_vector;
@@ -22,13 +23,13 @@ void Command::Parse()
 		cout << "No command '"<< Command::line_array[1] <<"' found" << endl;
 	else
 	{
+		vector<string> args;
 		int size = 0;
 		for (int i = 2; Command::line_array[i] != NULL; i++)
 			size++;
 		if (size >= 1)
-		{
-			vector<string> test = Utils::CreateStringVector(Command::line_array, 2, size);
-		}
+			args = Utils::CreateStringVector(Command::line_array, 2, size);
+		(*commands_callback[command_type])(args);
 	}
 }
 
