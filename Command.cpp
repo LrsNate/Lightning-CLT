@@ -1,6 +1,6 @@
 #include "lightning.h"
 
-Command::Command(char **line)
+Command::Command(char **line) : line_array(NULL), commands(), commands_callback()
 {
 	Command::line_array = line;
 	vector<string> generate_vector;
@@ -14,6 +14,19 @@ Command::Command(char **line)
 	help_vector.push_back("help");
 	help_vector.push_back("h");
 	commands[HELP] = help_vector;
+}
+
+Command::Command(const Command& source) : line_array(NULL), commands(), commands_callback()
+{
+	commands = source.commands;
+	commands_callback = source.commands_callback;
+}
+
+Command& Command::operator=(Command source)
+{
+	commands = source.commands;
+	commands_callback = source.commands_callback;
+	return (*this);
 }
 
 void Command::Parse()

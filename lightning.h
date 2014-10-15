@@ -17,8 +17,12 @@ class Command
 {
 public:
 	enum Type {GENERATE_COMMAND, HELP, ERROR};
+	// Copy constructor
+	Command(const Command& source);
 	Command(char **line);
 	~Command();
+	// Move assignment operator
+	Command& operator=(Command source);
 	void Parse();
 private:
 	char						**line_array;

@@ -20,20 +20,24 @@ SRC		=	BundleGeneration \
 			Utils			 \
 			main			 \
 
-CC		=	clang++
+# Compiler options
+CXX			=	clang++
+CFLAGS		=	-Wall -Wextra -Werror
+CXXFLAGS	=	-std=c++11 -Weffc++
 
 .PHONY: all clean fclean re
+.IMPLICITS:
 
 all: $(NAME)
 
 $(NAME): $(addsuffix .o, $(SRC))
 	@echo "$(COLOR_BLUE)Lightning Builder $(COLOR_YELLOW)v$(VERSION)"
 	@echo "$(COLOR_CLEAN)-- Compiling files ..."
-	@$(CC) -o $(NAME) $(addsuffix .cpp, $(SRC))
+	@$(CXX) -o $(NAME) $(addsuffix .cpp, $(SRC))
 	@echo "$(COLOR_GREEN)== DONE ==$(COLOR_CLEAN)"
 
 %.o: %.cpp
-	@$(CC) -c $<
+	@$(CXX) $(CFLAGS) $(CXXFLAGS) -c $<
 
 clean:
 	@echo "$(COLOR_RED)-- Cleaning $(NAME)$(COLOR_CLEAN)"

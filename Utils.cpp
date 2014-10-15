@@ -13,7 +13,7 @@ vector<string> Utils::CreateStringVector(char **array, int start, int size)
 string Utils::GetFileContent(string filename)
 {
 	ifstream file;
-	file.open(filename);
+	file.open(filename.c_str());
 	if (file.is_open())
 	{
 		string file_content;
